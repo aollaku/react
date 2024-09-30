@@ -1,0 +1,9 @@
+required: sudo
+service:
+  - docker
+
+before_intall:
+  - docker build -t andi/react -f Dockerfile.dev .
+  
+script:
+  - docker run -e CI=true andi/react npm run test
