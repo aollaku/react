@@ -1,9 +1,12 @@
+# Requre sudo privileges to run docker
 required: sudo
+# Gives the Travis CI the type of services you want to run. In this case we need to run docker.
 service:
   - docker
-
+# Build docker dev to build images of the dev docker file
 before_intall:
   - docker build -t andi/react -f Dockerfile.dev .
-  
+ ## Run the docker and change the startup command from dockerfile.dev to npm run test. Add "-e CI=true",
+ # to exit the test after execution instead of "== ==coverage". 
 script:
   - docker run -e CI=true andi/react npm run test
