@@ -10,3 +10,25 @@ before_intall:
  # to exit the test after execution instead of "== ==coverage". 
 script:
   - docker run -e CI=true andi/react npm run test
+
+# Deploy our application on AWS Elastic Beans Talk
+deploy:
+# The provider will be use for the deploy
+  provider: elasticbeanstalk
+# Region wich you will find on the Elastic Beans Talk Link. Use only the part of the region
+  region: "eu-north-1"
+# Name of the application on the Elastic Beans Talk that has been created.
+  app: "React"
+# Name of the envrionment on for this application. 
+  env: "React-env"
+# The name of the bucket. 
+  bucket_name: "elasticbeanstalk-eu-north-1-715841334298"
+# Path inside the bucket wich will be created after the name we put in this line.
+  bucket_path: "React"
+# Definde the branch master of GitHub to deploy your application.
+  on:
+    branch: master
+# Create a user and generate the ACCESS Key and SECRET ACCESS Key for this user on AWS IAM and attach them to the 
+# created repository. Never paste the Access key and Access secret key in this file because this is public on Github.
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
